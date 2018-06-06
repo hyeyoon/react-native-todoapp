@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import AppTitle from './AppTitle';
+import InputBox from './InputBox';
+import FilterMenu from './FilterMenu';
+import TodoList from './TodoList';
 
 export default class ToDoApp extends Component {
 	state = {
@@ -24,10 +28,33 @@ export default class ToDoApp extends Component {
 		],
 		todoInput: '',
 	};
+	addTodo = () => {
+		const { todoInput, todos } = this.state;
+		this.setState({
+			todos: todos.concat({
+				id: todos.length,
+				todo: todoInput,
+				isCompleted: false,
+			}),
+			todoInput: '',
+		})
+	};
+	onInputChange = (txt) => {
+		this.setState({
+			todoInput: txt
+		})
+	};
 	render() {
+		const {
+			addTodo,
+			onInputChange
+		} = this;
 		return (
 			<View style={styles.container}>
-				<Text style={styles.title}>{this.state.title}</Text>
+				<AppTitle appTitle={this.state.title} />
+				<InputBox value={this.state.todoInput} onChange={onInputChange} onCreate={addTodo} />
+				<FilterMenu />
+				<TodoList todos={this.state.todos} />
 			</View>	
 		)
 	}
@@ -35,11 +62,6 @@ export default class ToDoApp extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		paddingTop: 20,
-	},
-	title: {
-		color: '#6374d0',
-		textAlign: 'center',
-		fontSize: 20,
+		flex: 1,
 	}
 })
