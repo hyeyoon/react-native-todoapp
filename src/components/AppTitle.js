@@ -16,11 +16,10 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		paddingTop: 10,
 		paddingBottom: 10,
-		borderBottomWidth: 1,
-		borderBottomColor: '#6374d0',
+		backgroundColor: '#71c1fb'
 	},
 	title: {
-		color: '#6374d0',
+		color: '#fff',
 		textAlign: 'center',
 		fontSize: 20,
 	}

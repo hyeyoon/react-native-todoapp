@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Text, View, StyleSheet, Button } from 'react-native';
+import { TouchableOpacity, TextInput, Text, View, StyleSheet, Button } from 'react-native';
 
 export default class InputBox extends Component {
   render() {
@@ -10,15 +10,14 @@ export default class InputBox extends Component {
           style={styles.input}
           value={value}
           placeholder="Add Something..."
+          placeholderTextColor={'#ffffff'}
           autoCorrect={false}
           onSubmitEditing={onCreate}
           onChangeText={txt => onChange(txt)}
         />
-        <Button
-          onPress={onCreate}
-          style={styles.button}
-          title="Add"
-        />
+        <TouchableOpacity onPress={onCreate} style={styles.button}>
+          <Text style={styles.buttonText}>Add</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -29,18 +28,24 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#ecf0f1',
+    // backgroundColor: '#ecf0f1',
   },
   input: {
     marginLeft: 10,
     fontSize: 20,
-    color: 'black',
+    color: '#fff',
     borderBottomWidth: 2,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#fff',
     flexGrow: 1,
   },
   button: {
-    color: "#ffffff",
-    backgroundColor: "#6374d0",
+    padding: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
   }
 });

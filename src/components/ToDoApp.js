@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
+import { StatusBar, ScrollView, Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import AppTitle from './AppTitle';
 import InputBox from './InputBox';
 import FilterMenu from './FilterMenu';
@@ -44,17 +44,34 @@ export default class ToDoApp extends Component {
 			todoInput: txt
 		})
 	};
+	toggleTodo = (id) => {
+		const { todos } = this.state;
+		const idx = todos.findIndex(todo => todo.id === id);
+		const newTodos = todos;
+		newTodos[idx].isCompleted = !newTodos[idx].isCompleted;
+		this.setState({
+			todos: newTodos
+		});
+	};
+	setFilter = (option) => {
+		this.setState({
+			filter: option
+		})
+	};
 	render() {
 		const {
 			addTodo,
-			onInputChange
+			onInputChange,
+			toggleTodo,
+			setFilter
 		} = this;
 		return (
 			<View style={styles.container}>
+				<StatusBar barStyle="light-content" />
 				<AppTitle appTitle={this.state.title} />
 				<InputBox value={this.state.todoInput} onChange={onInputChange} onCreate={addTodo} />
-				<FilterMenu />
-				<TodoList todos={this.state.todos} />
+				<FilterMenu onChangeFilter={setFilter} filter={this.state.filter} />
+				<TodoList todos={this.state.todos} onToggle={toggleTodo} filter={this.state.filter} />
 			</View>	
 		)
 	}
@@ -63,5 +80,6 @@ export default class ToDoApp extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: '#71c1fb',
 	}
 })
