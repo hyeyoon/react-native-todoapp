@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, TextInput, Text, View, StyleSheet, Button } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default class InputBox extends Component {
   render() {
@@ -16,7 +17,8 @@ export default class InputBox extends Component {
           onChangeText={txt => onChange(txt)}
         />
         <TouchableOpacity onPress={onCreate} style={styles.button}>
-          <Text style={styles.buttonText}>Add</Text>
+          <Icon name='ios-add-circle-outline' type='ionicon' color='#fff' size={30} />
+          {/* <Text style={styles.buttonText}>Add</Text> */}
         </TouchableOpacity>
       </View>
     );
@@ -32,7 +34,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginLeft: 10,
-    fontSize: 20,
+    fontSize: 18,
     color: '#fff',
     borderBottomWidth: 2,
     borderBottomColor: '#fff',

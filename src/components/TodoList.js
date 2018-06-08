@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, ScrollView, Text, View, StyleSheet } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 export default class TodoList extends Component {
   render() {
-    const { todos, filter, onToggle } = this.props;
+    const { todos, filter, onToggle, onDelete } = this.props;
     return (
       <View style={styles.scrollViewContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
@@ -18,8 +19,9 @@ export default class TodoList extends Component {
           }).map(todo => {
             return (
               <View key={todo.id} style={styles.list}>
-                <TouchableOpacity onPress={() => onToggle(todo.id)}>
+                <TouchableOpacity onPress={() => onToggle(todo.id)} style={styles.listItem}>
                   <Text style={[todo.isCompleted ? styles.checked : styles.unchecked]}>{todo.todo}</Text>
+                  <Icon name='trash' type='evilicon' color='#fb7171' onPress={() => onDelete(todo.id)} />
                 </TouchableOpacity>
               </View>
             );
@@ -47,6 +49,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     backgroundColor: '#ffffff',
+  },
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   checked: {
     textDecorationLine: 'line-through',
